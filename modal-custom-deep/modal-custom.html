@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: #f0f0f6;
+            font-family: sans-serif;
+        }
+
+        .container {
+            max-width: 100%;
+            width: 1200px;
+            margin: auto;
+        }
+        
+        .modalCustomOuter {
+            /* display: none; */
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.4); 
+        }
+
+        .modalCustomBox {
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            transition: .2s;
+        }
+        .modalHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .modalCustom {
+            background: #fff;
+            width: 450px;
+            position: relative;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px #fff;
+        }
+        .modalCustomInner {
+            background: #fff;
+            width: 480px;
+            position: relative;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px #fff;
+        }
+
+        .modalCustomHide {
+            display: none;
+        }
+
+        .modalBtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+
+        .modalBtn .primary-btn {
+            width: 110px;
+            font-size: .85rem;
+            padding: 10px 12px;
+            background: #f32;
+            color: #fff;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .modalBtn .secondary-btn {
+            width: 110px;
+            font-size: .85rem;
+            padding: 10px 12px;
+            background: rgb(9, 176, 70);
+            color: #fff;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .modCrose {
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="modalCustomOuter">
+        <div class="modalCustomBox">
+            <div class="modalCustom">
+                <div class="modalHeader">
+                    <h3>heading</h3>
+                    <span class="modCrose parent-cancel">X</span>
+                </div>
+                <div class="modalContent">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio voluptate soluta fuga esse nam, quia delectus impedit suscipit. Dolorum nihil neque reprehenderit minima nobis itaque culpa voluptate rerum officiis saepe?</p>
+                </div>
+                <div class="modalBtn">
+                    <button class="btn primary-btn parent-cancel">Cancel</button>
+                    <button class="btn secondary-btn" id="showModal">Yes</button>
+                </div>
+            </div>
+            <div class="modalCustomInner modalCustomHide">
+                <div class="modalHeader">
+                    <h3>heading</h3>
+                    <span class="modCrose child-cancel">X</span>
+                </div>
+                <div class="modalContent">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio voluptate soluta fuga esse nam, quia delectus impedit suscipit. Dolorum nihil neque reprehenderit minima nobis itaque culpa voluptate rerum officiis saepe?</p>
+                </div>
+                <div class="modalBtn">
+                    <button class="btn primary-btn child-cancel">Cancel</button>
+                    <button class="btn secondary-btn" id="childYes">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<script>
+    $(function() {
+        $("#childYes").click(function() {
+            $(".modalCustomInner").addClass("modalCustomHide")
+            $(".modalCustomOuter").addClass("modalCustomHide")
+        })
+
+        $("#showModal").click(function() {
+            $(".modalCustomInner").removeClass("modalCustomHide")
+            $(".modalCustom").addClass("modalCustomHide")
+        })
+
+        $(".parent-cancel").click(function() {
+            $(".modalCustomOuter").addClass("modalCustomHide")
+            $(".modalCustom").addClass("modalCustomHide")
+        })
+
+        $(".child-cancel").click(function() {
+            $(".modalCustomOuter").addClass("modalCustomHide")
+            $(".modalCustomInner").addClass("modalCustomHide")
+        })
+    })
+</script>
+</html>
